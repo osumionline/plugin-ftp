@@ -10,7 +10,7 @@ class OFTP {
 	private ?string   $server          = null;
 	private ?string   $user_name       = null;
 	private ?string   $user_pass       = null;
-	private ?resource $conn            = null;
+	private mixed     $conn            = null;
 	private bool      $connected       = false;
 	private bool      $logged          = false;
 	private int       $mode            = FTP_ASCII;
@@ -231,4 +231,13 @@ class OFTP {
 
 		return $result;
 	}
+
+	/**
+	 * Disconnect automatically when class is destroyed
+	 *
+	 * @return void
+	 */
+	public function __destruct() {
+        $this->disconnect();
+    }
 }
